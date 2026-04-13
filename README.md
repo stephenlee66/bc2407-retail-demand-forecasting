@@ -4,7 +4,7 @@ Group project for BC2407 Analytics II: Advanced Predictive Techniques, focused o
 
 ## 📌 Project Overview
 
-This project develops a machine learning pipeline to forecast weekly units sold across **76 stores** and **28 SKUs** spanning January 2022 to July 2024. The pipeline engineers time-series features at three levels (store-SKU, store, SKU), compares Linear Regression, MARS, and Random Forest models, and deploys the best model in an interactive Shiny application that predicts promotion impact.
+This project develops a ML pipeline to forecast weekly units sold across **76 stores** and **28 SKUs** spanning January 2022 to July 2024. The pipeline engineers time-series features at 3 levels (store-SKU, store, SKU), compares Linear Regression, MARS, and Random Forest models, and deploys the best model in an interactive Shiny application that predicts promotion impact.
 
 The final Random Forest model achieved **R² = 0.77** and **RMSE = 21.51** on the test set, with `is_featured_sku` as the dominant predictor.
 
@@ -34,11 +34,11 @@ The final Random Forest model achieved **R² = 0.77** and **RMSE = 21.51** on th
 | Variable | Type | Description |
 |---|---|---|
 | `record_ID` | Integer | Unique row identifier |
-| `week` | Date | Week of the transaction (Jan 2022 – Jul 2024) |
+| `week` | Date | Date of the transaction |
 | `store_id` | Factor | Store identifier (76 unique) |
 | `sku_id` | Factor | Product identifier (28 unique) |
-| `total_price` | Numeric | Selling price (USD) |
-| `base_price` | Numeric | Original price before discounts (USD) |
+| `total_price` | Numeric | Selling price |
+| `base_price` | Numeric | Original price before discounts |
 | `is_featured_sku` | Binary | 1 = Product was featured in promotion |
 | `is_display_sku` | Binary | 1 = Product was on display promotion |
 | `units_sold` | Integer | **Target variable**: weekly units sold |
@@ -111,7 +111,7 @@ Raw Dataset (150,150 rows)
 
 > All features use lagged values only so no future data leakage. Rows with insufficient history (~first 4 weeks per store-SKU) are dropped. Outlier filtering applied after feature engineering to preserve lag integrity.
 
-### Variables Dropped from Modelling
+### Variables Dropped before Modelling
 
 | Variable | Reason |
 |---|---|
@@ -133,7 +133,7 @@ Raw Dataset (150,150 rows)
 
 ### Linear Regression
 
-| Model | Variables Dropped (VIF) | Test RMSE | Test R² |
+| Model | Variables Dropped | Test RMSE | Test R² |
 |---|---|---|---|
 | LR1 | None (full model) | 25.98 | 0.660 |
 | LR2 | `total_price` | 26.14 | 0.656 |
@@ -150,9 +150,9 @@ Raw Dataset (150,150 rows)
 
 ### Random Forest
 
-| Model | Configuration | Test RMSE | Test R² | Train R² |
-|---|---|---|---|---|
-| **nt500_mt6** | **ntree=500, mtry=6** | **21.51** | **0.767** | **0.833** |
+| Model | Configuration | Test RMSE | Test R² |
+|---|---|---|---|
+| nt500_mt6 | ntree=500, mtry=6 | 21.51 | **0.767 |
 
 > `nt500_mt6` was selected as the final model through fast testing of different parameter combinations using `ranger` package.
 
@@ -188,7 +188,7 @@ The app loads the saved RF model (`rf_best.rds`) and provides a **Weekly Promoti
 4. Sales lift = difference between the two predictions
 5. Recommendation displayed as weak / moderate / strong lift
 
-**To run:** Place `rf_best.rds` and `df_train.rds` in the `../data/` directory and run `05_app.R`. Update the `setwd()` path to match your file structure.
+**To run:** Ensure `rf_best.rds` and `df_train.rds` is in the `../data/` directory and run `05_app.R`. Update the `setwd()` path to match your file structure.
 
 ## 🔍 Limitations
 
