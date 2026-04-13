@@ -4,7 +4,7 @@ Group project for BC2407 Analytics II: Advanced Predictive Techniques, focused o
 
 ## 📌 Project Overview
 
-This project develops a ML pipeline to forecast weekly units sold across **76 stores** and **28 SKUs** spanning January 2022 to July 2024. The pipeline engineers time-series features at 3 levels (store-SKU, store, SKU), compares Linear Regression, MARS, and Random Forest models, and deploys the best model in an interactive Shiny application that predicts promotion impact.
+This project develops a ML pipeline to forecast weekly units sold across **76 stores** and **28 SKUs** spanning January 2022 to July 2024. The pipeline engineers time-series features at 3 levels (store-SKU, store, SKU), compares Linear Regression, MARS, and Random Forest models then deploys the best model in an interactive Shiny application that aims to predict next week's sales with promotion impact.
 
 The final Random Forest model achieved **R² = 0.77** and **RMSE = 21.51** on the test set, with `is_featured_sku` as the dominant predictor.
 
@@ -41,7 +41,7 @@ The final Random Forest model achieved **R² = 0.77** and **RMSE = 21.51** on th
 | `base_price` | Numeric | Original price before discounts |
 | `is_featured_sku` | Binary | 1 = Product was featured in promotion |
 | `is_display_sku` | Binary | 1 = Product was on display promotion |
-| `units_sold` | Integer | **Target variable**: weekly units sold |
+| `units_sold` | Integer | **Target Variable**: weekly units sold |
 
 ## 🔍 Key EDA Findings
 
