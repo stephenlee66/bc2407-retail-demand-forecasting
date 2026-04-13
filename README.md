@@ -63,7 +63,7 @@ Raw Dataset (150,150 rows)
         │
         ▼
   Data Cleaning
-  (date parsing, factor conversion, 1 NA imputed)
+  (date parsing, factor conversion, 1 NA imputed after split using train set only)
         │
         ▼
   Feature Engineering
@@ -122,10 +122,10 @@ Raw Dataset (150,150 rows)
 
 ### Outlier Treatment
 
-| Stage | Max | Median | IQR |
+| Stage | Max | Median |
 |---|---|---|---|
-| Before filtering | 2,876 | 35 | 19–62 |
-| After filtering (99th pctl) | 286 | 35 | 19–61 |
+| Before filtering | 2,876 | 35 |
+| After filtering (99th pctl) | 286 | 35 |
 
 ~1,498 rows removed (1%). Extreme values were predominantly SKU 219009 during Feb 2022 with both promotions active.
 
@@ -146,16 +146,15 @@ Raw Dataset (150,150 rows)
 |---|---|---|---|
 | deg1_np30 | degree=1, nprune=30 | 23.92 | 0.711 |
 | deg1_np25 | degree=1, nprune=25 | 23.94 | 0.711 |
-| deg3_np20 | degree=3, nprune=20 | 24.07 | 0.708 |
+| deg1_np20 | degree=1, nprune=20 | 23.96 | 0.711 |
 
 ### Random Forest
 
 | Model | Configuration | Test RMSE | Test R² | Train R² |
 |---|---|---|---|---|
-| nt500_mt3 | ntree=500, mtry=3 | 21.25 | 0.772 | 0.967 |
 | **nt500_mt6** | **ntree=500, mtry=6** | **21.51** | **0.767** | **0.833** |
 
-> `nt500_mt6` was selected as the final model. While `mt3` had marginally better test R², `mt6` has a significantly smaller train-test gap (0.07 vs 0.19), indicating more stable generalisation.
+> `nt500_mt6` was selected as the final model through fast testing of different parameter combinations using `ranger` package.
 
 ## 📈 Final Results
 
