@@ -1,4 +1,4 @@
-# 🛒 BC2407 — Retail Demand Forecasting
+# 🛒 BC2407 Retail Demand Forecasting
 
 Group project for BC2407 Analytics II: Advanced Predictive Techniques, focused on forecasting weekly retail demand and quantifying the impact of promotions on sales.
 
